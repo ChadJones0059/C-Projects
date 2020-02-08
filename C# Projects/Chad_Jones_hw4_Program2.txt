@@ -1,0 +1,146 @@
+using System;
+using static System.Console;
+
+namespace Program_2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            Game rps = new Game();
+            rps.Winner();
+            rps.UserMoney();
+            rps.History();
+
+            ReadKey();
+        }
+        public static string GetInput(string msg)
+        {
+            WriteLine(msg);
+            return ReadLine();
+        }
+    }
+}
+
+
+
+using System;
+using static System.Console;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Program_2
+{
+    class Game
+    {
+        int userInput, userWins, compInput, compWins, money, bet, counter;
+        public Game()
+        {
+            userInput = 1;
+            userWins = 0;
+            compInput = 0;
+            compWins = 0;
+            money = 100;
+            bet = 0;
+            counter = 0;
+        }
+        public void Winner()
+        {  
+            while (money > 0 && userInput != 0)
+            {
+                if (userWins == 4)
+                {
+                    WriteLine("You Win!!!!");
+                    break;
+                }
+                else if(compWins == 4)
+                {
+                    WriteLine("Computer Wins!");
+                    break;
+                }
+                while (userWins != 4 && compWins != 4)
+                {
+                    counter++;
+                    WriteLine("You have ${0} dollars remaining ", money);
+                    WriteLine("You have played " + counter + " game(s)");
+                    bet = int.Parse(Program.GetInput("Please enter your bet"));
+                    if (bet <= 0 || userInput >= 4 || userInput <= 0)
+                    {
+                        WriteLine("Please enter valid input!");
+                        continue;
+                    }
+                    else
+                    {
+                        userInput = int.Parse(Program.GetInput("Please enter your choice (1 - Rock, 2 - Paper, 3 - Scissors,) \nPress 0 to Exit"));
+                        Random ranGen = new Random();
+                        compInput = ranGen.Next(1, 4);
+                        if(userInput == 0)
+                        {
+                            WriteLine("Thank you for playing");
+                            break;
+                        }
+
+                        else if (userInput == compInput)
+                        {
+                            WriteLine("User Choice is: " + userInput + "\nComputer Choice: " + compInput);
+                            WriteLine("Draw!");
+                            UserMoney();
+                        }
+                        else if (userInput == 1 && compInput == 3)
+                        {
+                            WriteLine("User Choice is: " + userInput + "\nComputer Choice: " + compInput);
+                            WriteLine("User Wins!");
+                            userWins++;
+                            UserMoney();
+
+                        }
+                        else if ((userInput == 2 && compInput == 1) || (userInput == 3 && compInput == 2))
+                        {
+                            WriteLine("User Choice is: " + userInput + "\nComputer Choice: " + compInput);
+                            WriteLine("User Wins!");
+                            userWins++;
+                            UserMoney();
+                        }
+                        else
+                        {
+                            WriteLine("User Choice is: " + userInput + "\nComputer Choice: " + compInput);
+                            WriteLine("Computer Wins!");
+                            compWins++;
+                            UserMoney();
+                        }
+                    }
+                    WriteLine("User Wins: " + userWins + "\nComputer Wins: " + compWins);
+                    break;
+                }            
+            }
+            WriteLine("Game Over!!! \nYou have $" + money + " remaining dollars");
+            UserMoney();
+        }
+        public int UserMoney()
+        {
+            if (userInput == compInput)
+            {
+                money += 0;
+            }
+            else if (userInput == 1 && compInput == 3)
+            {
+                money = money + 2 * bet;
+            }
+            else if ((userInput == 2 && compInput == 1) || (userInput == 3 && compInput == 2))
+            {
+                money = money + 2 * bet;
+            }
+            else
+            {
+                money = money - bet;
+            }
+            return money;
+        }
+        public int History()
+        {
+            WriteLine("You played " + counter + " game(s)");
+            return counter;
+        }
+    }
+}

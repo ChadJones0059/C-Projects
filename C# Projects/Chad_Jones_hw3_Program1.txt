@@ -1,0 +1,48 @@
+using System;
+using static System.Console;
+
+namespace Prob_1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string name;
+            double average, total;
+
+            WriteLine("     ----- Score Average Calculator by Chad Jones -----     ");
+            Write("Please enter your name: ");
+            name = ReadLine();
+
+            double mscore = UserInput("midterm exam score");
+            double fscore = UserInput("final exam score");
+
+            total = TotalExam(mscore, fscore);
+            average = AverageExam(mscore, fscore);
+
+            DisplayResults(name, mscore, fscore, total, average);
+        }
+        static double UserInput(string type)
+        {
+            Write("Please enter your " + type + ": ");
+            return double.Parse(ReadLine());
+        }
+        static double TotalExam(double input1, double input2)
+        {
+            return input1 + input2;
+        }
+        static double AverageExam(double input1, double input2)
+        {
+            return (input1 + input2) / 2;
+        }
+        static void DisplayResults(string input1, double input2, double input3, double input4, double input5)
+        {
+            WriteLine("            ----- Calculation Resuluts -----          ");
+            WriteLine("Name: " + input1);
+            WriteLine("Midterm: " + input2);
+            WriteLine("Final: " + input3);
+            WriteLine("Total: " + input4);
+            WriteLine("Average: " + input5);
+        }
+    }
+}

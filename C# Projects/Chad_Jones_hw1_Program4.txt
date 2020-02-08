@@ -1,0 +1,50 @@
+using System;
+using static System.Console;
+
+
+namespace Problem_4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double weightpack1;
+            double weightpack2;
+            double pricepack1;
+            double pricepack2;
+            double unitprice1;
+            double unitprice2;
+
+
+            WriteLine("          ----- Unit Price Calculator by Chad Jones -----");
+
+            string input;
+            Write("Please enter the weight of package 1 (e.g. enter 1 for 1 lb): ");
+            input = ReadLine();
+            weightpack1 = double.Parse(input);
+
+            Write("Please enter the price of package 1 (e.g. enter 1.5 for $1.5): ");
+            input = ReadLine();
+            pricepack1 = double.Parse(input);
+
+            Write("Please enter the weight of package 2 (e.g. enter 1 for 1 lb): ");
+            input = ReadLine();
+            weightpack2 = double.Parse(input);
+
+            Write("Please enter the price of package 2 (e.g. enter 1.5 for $1.5): ");
+            input = ReadLine();
+            pricepack2 = double.Parse(input);
+
+             // print out 2 decimals
+            unitprice1 = pricepack1 / weightpack1;
+            unitprice2 = pricepack2 / weightpack2;
+            
+
+            WriteLine("               ----- Calculation Results -----");
+            WriteLine("The unit price of package 1 is {0:F2}" + " $/lb" , unitprice1);
+            WriteLine("The unit price of package 2 is {0:F2}" + " $/lb", unitprice2);
+
+            ReadKey();
+        }
+    }
+}

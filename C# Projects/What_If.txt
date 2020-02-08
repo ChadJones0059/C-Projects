@@ -1,0 +1,35 @@
+using System;
+using static System.Console;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string input;
+            double irate = 0, balance = 0;
+
+            WriteLine("Please enter your balance: ");
+            // input = ReadLine();
+            balance = double.Parse(ReadLine());
+
+            WriteLine("Please enter your interest rate: ");
+            // input = ReadLine();
+            irate = double.Parse(ReadLine());
+
+            WriteLine("The interest for the next month is " + (balance * (irate / 1200)));
+
+            for (int i = 0; i <= 10 ; i++ )
+            {
+                double irateNew = (0.5 + (0.1) * i) * irate ;
+                WriteLine("The interest for the next month with interest rate" + irateNew + " is " + (balance * (irateNew / 1200)));
+
+            }
+     
+            WriteLine("The program is terminated.");
+            ReadLine();
+
+        }
+    }
+}

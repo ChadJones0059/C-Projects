@@ -1,0 +1,81 @@
+using System;
+using static System.Console;
+
+namespace NestedExample
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            char info350, info320;
+            double info350Grade, info320Grade;
+
+            string input;
+
+            Write("Please enter your letter grade from INFO 350 (enter A, B, C, D or F): ");
+            input = ReadLine();
+            info350 = char.Parse(input);
+
+            Write("Please enter your letter grade from INFO 320 (enter A, B, C, D or F): ");
+            input = ReadLine();
+            info320 = char.Parse(input);
+
+            if (info350 == 'A' || info350 == 'a')
+            {
+                info350Grade = 4.0;
+            }
+            else if (info350 == 'B' || info350 == 'b')
+            {
+                info350Grade = 3.0;
+            }
+            else if (info350 == 'C' || info350 == 'c')
+            {
+                info350Grade = 3.0;
+            }
+            else if (info350 == 'D' || info350 == 'd')
+            {
+                info350Grade = 3.0;
+            }
+            else
+            {
+                info350Grade = 0.0;
+            }
+
+            if (info320 == 'A' || info320 == 'a')
+            {
+                info320Grade = 4.0;
+            }
+            else if (info320 == 'B' || info320 == 'b')
+            {
+                info320Grade = 3.0;
+            }
+            else if (info320 == 'C' || info320 == 'c')
+            {
+                info320Grade = 3.0;
+            }
+            else if (info320 == 'D' || info320 == 'd')
+            {
+                info320Grade = 3.0;
+            }
+            else
+            {
+                info320Grade = 0.0;
+            }
+
+            double gpa = (info350Grade + info320Grade) / 2;
+
+            if (gpa > 1.0 && (info350Grade != 0 && info320Grade != 0))
+            {
+                WriteLine("Pass! ");
+            }
+            else if (gpa > 1.0 && (info350Grade == 0 || info320Grade == 0))
+            {
+                WriteLine("Conditional Pass! ");
+            }
+            else
+            {
+                WriteLine("Fail! ");
+            }
+        }
+    }
+}

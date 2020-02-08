@@ -1,0 +1,69 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Console;
+
+namespace hw2
+{
+    class hw2
+    {
+        static void Main(string[] args)
+        {
+            string input = "";
+            double bal, irate, pay, count = 1, student, employed;
+            
+            WriteLine("\t ----- Payment Calculation Application ----- ");
+
+            do
+            {
+                Write("Please enter your balance in $: ");
+                input = ReadLine();
+                bal = double.Parse(input);
+
+                Write("Please enter your interest rate (%): ");
+                input = ReadLine();
+                irate = double.Parse(input);
+
+                Write("Are you a student? (1 - Yes, 0 - No): ");
+                input = ReadLine();
+                student = double.Parse(input);
+
+                Write("Are you employeed? (1 - Yes, 0 - No): ");
+                input = ReadLine();
+                employed = double.Parse(input);
+
+                if(student == 1 )
+                {
+                    pay = (bal * irate * 0.9 / 1200);
+                }
+                else if(student ==0 && employed ==0)
+                {
+                    pay = (bal * irate * 1.10 / 1200);
+                }
+                else
+                {
+                    pay = (bal * irate * 0.85 / 1200);
+                }
+
+                WriteLine("Your monthly payment is {0:F2}.", pay);
+
+                if (count <= 2)
+                {
+                    count++;
+                    WriteLine("Do you want to re-calculate? (enter Y to re-calculate): ");
+                    input = ReadLine();
+                }
+                else
+                {
+                    break;
+                }   
+            } while (input == "Y") ;
+
+
+            WriteLine("The program is terminated");
+            ReadKey();
+        }
+    }
+}

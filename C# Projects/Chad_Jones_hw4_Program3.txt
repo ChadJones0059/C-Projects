@@ -1,0 +1,86 @@
+using System;
+using static System.Console;
+
+namespace Program_3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int nPoints = 0;
+            nPoints = int.Parse(GetInput("Welcome to Starbucks. How many location points do you want to compare? "));
+            Map myMap = new Map(nPoints);
+            myMap.DisplayResult();
+        }
+        public static string GetInput(string msg)
+        {
+            Write(msg);
+            return ReadLine();
+        }
+    }
+}
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+using static System.Console;
+
+namespace Program_3
+{
+    class Map
+    {
+        double[] point;
+        double[] xAxis;
+        double[] yAxis;  
+        double[] near;
+        double[] cand;
+        public Map(int nPoints)
+        {
+            point = new double[nPoints];
+            xAxis = new double[nPoints];
+            yAxis = new double[nPoints];
+
+            near = new double[3];
+            cand = new double[3];
+
+            for (int i = 0; i < point.Length; i++)
+            {
+                point[i] = i + 1;
+                xAxis[i] = double.Parse(Program.GetInput("Pleae provide x-coordinate value of point " + point[i] + ": "));
+                yAxis[i] = double.Parse(Program.GetInput("Pleae provide y-coordinate value of point " + point[i] + ": "));
+            }
+
+            near[0] = 1;
+            near[1] = 2;
+            near[2] = (xAxis[0] - xAxis[1]) * (xAxis[0] - xAxis[1]) + (yAxis[0] - yAxis[1]) * (yAxis[0] - yAxis[1]);
+
+            for(int i = 0; i < point.Length - 1; i++)
+            {
+                for(int j = i + 1; j < point.Length; j++)
+                {
+                    cand[0] = i + 1; 
+                    cand[1] = j + 1;
+                    cand[2] = (xAxis[i] - xAxis[j]) * (xAxis[i] - xAxis[j]) + (yAxis[i] - yAxis[j]) * (yAxis[i] - yAxis[j]);
+
+                    if(cand[2] < near[2])
+                    {
+                        near[0] = cand[0];
+                        near[1] = cand[1];
+                        near[2] = cand[2];
+                    }
+                }
+            }
+        }      
+        public void DisplayResult()
+        {
+            WriteLine("Press any key to see the closest two Starbucks locations.");
+            ReadKey();
+            Write("\n");
+            Write("Location " + near[0] + " and Location " + near[1] + " are closest together with a distance of " + near[2] + " units");
+            ReadKey();
+        }
+    }
+}

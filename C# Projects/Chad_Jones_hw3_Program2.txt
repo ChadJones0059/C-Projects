@@ -1,0 +1,46 @@
+using System;
+using static System.Console;
+namespace Prob_2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double average, total;
+            WriteLine("               -------GPA Calculator by Chad Jones-------");
+            double course1 = GetInput("first ");
+            double course2 = GetInput("second ");
+            double course3 = GetInput("third ");
+
+            total = Total(course1, course2, course3);
+            average = AverageGPA(course1, course2, course3);
+
+            Display(course1, course2, course3, total, average);
+            ReadKey();
+        }
+        static double GetInput(string input)
+        {
+            Write("Please enter your grade from your " + input + "course (Enter 4, 3, 2, 1 or 0 for A, B ,C, D, F, respectfully): ");
+            return double.Parse(ReadLine());
+        }
+        static double Total(double input1, double input2, double input3)
+        {
+            double credits = 3;
+            return credits * (input1 + input2 + input3);
+        }
+        static double AverageGPA(double input1, double input2, double input3)
+        {
+            double credits = 3;
+            return (credits * (input1 + input2 + input3) / (credits * 3));
+        }
+        static void Display(double input1, double input2, double input3, double input4, double input5)
+        {
+            WriteLine("                  -------Calculation Results-------");
+            WriteLine("Course 1 : " + input1);
+            WriteLine("Course 2 : " + input2);
+            WriteLine("Course 3 : " + input3);
+            WriteLine("Total :  " + input4);
+            WriteLine("Average GPA : " + input5);
+        }
+    }
+}

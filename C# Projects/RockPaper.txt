@@ -1,0 +1,64 @@
+using System;
+using static System.Console;
+
+namespace RockPaper
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int user = 1;
+            int comp;
+            int money = 100;
+            int userbet;
+
+
+            while (money > 0 && user != 0)
+            {
+                WriteLine("Please enter your bet, you have ${0} dollars remaining", money);
+                userbet = int.Parse(ReadLine());
+
+                WriteLine("Please enter your choice (1 - Rock, 2 - Paper, 3 - Scissors) ");
+                user = int.Parse(ReadLine());
+
+                if (user >= 4)
+                {
+                    WriteLine("Please enter valid input!");
+                }
+                else
+                {
+                    Random ranGen = new Random();
+                    comp = ranGen.Next(1, 4);
+
+                    if (user == comp)
+                    {
+                        WriteLine("User Choice is: " + user + "\nComputer Choice: " + comp);
+                        WriteLine("Draw!");
+                        money += 0;
+                    }
+                    else if (user == 1 && comp == 3)
+                    {
+                        WriteLine("User Choice is: " + user + "\nComputer Choice: " + comp);
+                        WriteLine("User Wins!");
+                        money = money + 2 * userbet;
+
+                    }
+                    else if ((user == 2 && comp == 1) || (user == 3 && comp == 2))
+                    {
+                        WriteLine("User Choice is: " + user + "\nComputer Choice: " + comp);
+                        WriteLine("User Wins!");
+                        money = money + userbet;
+                    }
+                    else
+                    {
+                        WriteLine("User Choice is: " + user + "\nComputer Choice: " + comp);
+                        WriteLine("Computer Wins!");
+                        money = money - userbet;
+                    }
+                }
+            }
+            WriteLine("Ya fucking broke son! $" + money);
+            ReadKey();
+        }
+    }
+}

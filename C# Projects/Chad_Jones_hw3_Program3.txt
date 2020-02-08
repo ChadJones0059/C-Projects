@@ -1,0 +1,51 @@
+using System;
+using static System.Console;
+namespace Prob_3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int input;
+            input = getInput();
+            DisplayInput(input);
+        }
+        static int getInput()
+        {
+            int input;
+            while (true)
+            {
+                Write("Enter an integer(0 to 15): ");
+                input = int.Parse(ReadLine());
+ 
+                if (input < 0 || input > 15)
+                {
+                    WriteLine("Invalid input");
+                    continue;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            return input;
+        }
+        static void DisplayInput(int input)
+        {
+            int hexNum;
+
+            if (input < 10)
+            {
+                hexNum = input + 48;
+            }
+            else
+            {
+                hexNum = input + 55;
+            }
+
+            Write("\nHexadecimal equivalent is: ");
+            WriteLine(Convert.ToChar(hexNum));
+            ReadKey();
+        }
+    }
+}

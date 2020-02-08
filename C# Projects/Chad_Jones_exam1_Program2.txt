@@ -1,0 +1,130 @@
+using System;
+using static System.Console;
+namespace Problem_1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double mcashflow, loanamt, loanper, monthpayment;
+            string input;
+            int counter = 0;
+            int student = 0;
+            int employee = 0;
+            int year = 0;
+            int fullTime = 0;
+
+            WriteLine(" ------ Program for Loan Eligibility -----");
+            do
+            {
+                counter++;
+
+                Write("Please enter your monthly cash flow in $: ");
+                input = ReadLine();
+                mcashflow = double.Parse(input);
+
+                Write("Please enter your loan amount in $: ");
+                input = ReadLine();
+                loanamt = double.Parse(input);
+
+                Write("Please enter your loan period in months: ");
+                input = ReadLine();
+                loanper = double.Parse(input);
+
+                Write("Are you a student? ( 1- Yes, 0 - No): ");
+                student = int.Parse(ReadLine());
+
+                Write("Are you employed? ( 1- Yes, 0 - No): ");
+                employee = int.Parse(ReadLine());
+
+                if (student == 1)
+                {
+                    WriteLine("What years are you? (1 - Freshman, 2 - Sophmore, 3 Junior, 4 Senior) ");
+                    year = int.Parse(ReadLine());
+
+                    if (year == 4 || year == 3)
+                    {
+                        monthpayment = (0.8) * (loanamt * (4.5) / 100 / (1 - 1 / Math.Pow(1 + (4.5) / 100, loanper)));
+                        WriteLine("Your monthly payment is {0:F2}.", monthpayment);
+                    }
+                    else
+                    {
+                        monthpayment = (0.9) * (loanamt * (4.5) / 100 / (1 - 1 / Math.Pow(1 + (4.5) / 100, loanper)));
+                        WriteLine("Your monthly payment is {0:F2}.", monthpayment);
+                    }
+                }
+                else if (student == 0 && employee == 0)
+                {
+                    monthpayment = (1.01) * (loanamt * (4.5) / 100 / (1 - 1 / Math.Pow(1 + (4.5) / 100, loanper)));
+                    WriteLine("Your monthly payment is {0:F2}.", monthpayment);
+                }
+                else if (student == 0 && employee == 1)
+                {
+                    WriteLine("Are you a full time employee? (Y/N)");
+                    fullTime = int.Parse(ReadLine());
+
+                    if (input == "Y")
+                    {
+                        monthpayment = (1) * (loanamt * (4.5) / 100 / (1 - 1 / Math.Pow(1 + (4.5) / 100, loanper)));
+                        WriteLine("Your monthly payment is {0:F2}.", monthpayment);
+                    }
+                    else
+                    {
+                        monthpayment = (.95) * (loanamt * (4.5) / 100 / (1 - 1 / Math.Pow(1 + (4.5) / 100, loanper)));
+                        WriteLine("Your monthly payment is {0:F2}.", monthpayment);
+                    }
+                }
+
+                monthpayment = loanamt * (4.5) / 100 / (1 - 1 / Math.Pow(1 + (4.5) / 100, loanper));
+
+                if (mcashflow <= 0 || loanamt <= 0 || loanper <= 0 || monthpayment <= 0)
+                {
+                    WriteLine("Please provide valid inputs. The values should be positive.\n");
+                    Write("Please enter your monthly cash flow in $: ");
+                    input = ReadLine();
+                    mcashflow = double.Parse(input);
+
+                    Write("Please enter your loan amount in $: ");
+                    input = ReadLine();
+                    loanamt = double.Parse(input);
+
+                    Write("Please enter your loan period in months: ");
+                    input = ReadLine();
+                    loanper = double.Parse(input);
+                }
+                else if (monthpayment < mcashflow && mcashflow > 5000)
+                {
+                    WriteLine("The calculated monthly payment is ${0:F2}", +monthpayment);
+                    WriteLine("Loan is eligible");
+                }
+                else if (monthpayment < mcashflow || mcashflow > 5000)
+                {
+                    WriteLine("The calculated monthly payment is ${0:F2}", +monthpayment);
+                    WriteLine("Loan is conditionally eligible");
+                }
+                else
+                {
+                    WriteLine("The calculated monthly payment is ${0:F2}", +monthpayment);
+                    WriteLine("Loan is not eligible");
+                }
+                WriteLine("Your monthly payment is {0:F2}.", monthpayment);
+
+                if (counter <= 3)
+                {
+                    counter++;
+                    WriteLine("Do you want to re-calculate? (enter Y to re-calculate): ");
+                    input = ReadLine();
+                }
+                else
+                {
+                    break;
+                }
+            } while (input == "Y");
+
+
+            WriteLine("The program is terminated");
+            ReadKey();
+        }
+    }
+}
+

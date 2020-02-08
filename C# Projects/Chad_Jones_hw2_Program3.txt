@@ -1,0 +1,29 @@
+using System;
+using static System.Console;
+namespace Problem_3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double cash, years, intrate;
+            double npv = 0;
+
+            WriteLine("Enter the annual cash flow: ");
+            cash = double.Parse(ReadLine());
+
+            WriteLine("Enter the years for the cash flow: ");
+            years = double.Parse(ReadLine());
+
+            WriteLine("Enter the interest rate: ");
+            intrate = double.Parse(ReadLine());
+
+            for (int i = 1; i <= years; i++)
+            {
+                npv += (cash / Math.Pow((1 + (intrate / 100)) , i));
+            }
+            WriteLine("The net present value (NPV) of your cash flow for " + years + " year(s) is ${0:F2}", +npv);
+            ReadKey();
+        }
+    }
+}

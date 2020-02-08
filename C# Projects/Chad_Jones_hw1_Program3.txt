@@ -1,0 +1,32 @@
+using System;
+using static System.Console;
+
+namespace Problem_3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double balance;
+            double interest;
+            double monthly;
+
+            WriteLine("     ----- Interest Calculator by Chad Jones -----     ");
+
+            string input;
+            Write("Please enter your balance in dollars (e.g., enter 100 for $100): ");
+            input = ReadLine();
+            balance = double.Parse(input);
+
+            Write("Please enter your annual interest rate in percentage (e.g., enter 4.5 for 4.5%): ");
+            input = ReadLine();
+            interest = double.Parse(input);
+
+            monthly = balance * (interest / 1200);
+
+            Write("The interest on the next monthly payment is {0:C2}", + monthly);
+
+            ReadKey();
+        }
+    }
+}

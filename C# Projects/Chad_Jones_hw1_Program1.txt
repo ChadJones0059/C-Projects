@@ -1,0 +1,19 @@
+using System;
+using static System.Console;
+
+namespace Problem_1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            WriteLine("Course: INFO 350");
+            WriteLine("Section: 001");
+            WriteLine("Name: James Harden");
+            WriteLine("Total Points: 88.6/100");
+            WriteLine("Letter Grade: B");
+
+            ReadKey();
+        }
+    }
+}

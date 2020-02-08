@@ -1,0 +1,49 @@
+using System;
+using static System.Console;
+namespace Problem_1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double mcashflow, loanamt, loanper, intrate, monthpayment;
+            string input;
+            
+
+            WriteLine("      ------ Program for Loan Eligibility -----");
+            Write("Please enter your monthly cash flow in $: ");
+            input = ReadLine();
+            mcashflow = double.Parse(input);
+
+            Write("Please enter your loan amount in $: ");
+            input = ReadLine();
+            loanamt = double.Parse(input);
+
+            Write("Please enter your loan period in months: ");
+            input = ReadLine();
+            loanper = double.Parse(input);
+
+            Write("Please enter the monthly interest rate in % (e.g. enter 4.5 for 4.5%): ");
+            input = ReadLine();
+            intrate = double.Parse(input);
+
+            monthpayment = loanamt * intrate/100 / (1 - 1 / Math.Pow(1 + intrate / 100, loanper));
+
+            WriteLine("The calculated monthly payment is ${0:F3}", + monthpayment);
+
+            if (monthpayment < mcashflow && mcashflow > 5000)
+            {
+                WriteLine("Loan is eligible");
+            }
+            else if (monthpayment < mcashflow || mcashflow > 5000)
+            {
+                WriteLine("Loan is conditionally eligible");
+            }
+            else
+            {
+                WriteLine("Loan is not eligible");
+            }
+            ReadKey();
+        }
+    }
+}

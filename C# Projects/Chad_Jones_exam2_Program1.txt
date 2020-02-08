@@ -1,0 +1,177 @@
+using System;
+using static System.Console;
+
+namespace Starship
+{
+    class MainProgram
+    {
+        static void Main(string[] args)
+        {
+            ImplementationMap myMap = new ImplementationMap();
+            myMap.EstimateDemand();
+            myMap.IdentifyWhetherToCover();
+            myMap.CalculateWDistance();
+            myMap.PickFarthestPoint();
+            myMap.SelectRobotType();
+            DisplayResult(myMap.GetSelectedType(), myMap.GetNRobots(), myMap.GetTotalCosts());
+            ReadKey();
+        }
+
+        public static string GetInput(string msg)
+        {
+            Write(msg);
+            return ReadLine(); // complete the return statement
+        }
+
+        public static void DisplayResult(double nRobot, double type, double costs) // complete the heading
+        {
+            WriteLine(nRobot + " Type " + type + " robot will be implemented. The daily operations costs will be {0:C}", costs);
+        }
+
+    }
+}
+
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Console;
+
+namespace Starship
+{
+    class ImplementationMap
+    {
+        double[] xLoc, yLoc, population, sRatio, preference; // arrays 
+        double[] cover, estimatedDemand, weightedDistance;
+        int indexOfFarthestPoint;
+        char selectedRobotType;
+        double nRobots, totalCosts;
+
+
+        public ImplementationMap()
+        {
+            xLoc = new double[20] { 1, 5, 8, 10, 12, 15, 7, 6, 6, 5, 12, 11, 7, 5, 9, 5, 5, 7, 2, 9 };
+            yLoc = new double[20] { 19, 18, 18, 17, 15, 13, 16, 15, 13, 12, 11, 10, 10, 8, 7, 7, 5, 5, 2, 2 };
+            population = new double[20] { 17012, 10471, 5885, 8371, 4580, 13425, 11170, 10917, 3197, 16748, 4448, 5463, 4225, 5665, 19307, 795, 8354, 16230, 5024, 12560 };
+            sRatio = new double[20] { 0.99, 0.96, 0.96, 0.94, 0.98, 0.91, 0.96, 0.99, 0.98, 0.98, 0.92, 0.92, 0.94, 0.9, 0.96, 0.87, 0.97, 0.95, 0.92, 0.93 };
+            preference = new double[20] { 4, 2, 2, 1, 4, 5, 1, 2, 3, 5, 4, 5, 1, 1, 2, 1, 5, 2, 4, 5 }; // complete the assignment statement
+            cover = new double[20];
+            estimatedDemand = new double[20];
+            weightedDistance = new double[20];
+            indexOfFarthestPoint = 0;
+            selectedRobotType = ' ';
+            nRobots = 0;
+            totalCosts = 0;
+        }
+
+        public void EstimateDemand()
+        {
+            for (int i = 0; i < estimatedDemand.Length-1; i++) //complete the heading
+            {
+                estimatedDemand[i] = population[i] * 0.01 * sRatio[i] * preference[i] * 0.2; // complete the assignment statement
+            }
+            Write("Estimated Demand: ");
+
+            foreach (double val in estimatedDemand)
+            {
+                Write("{0:F2} ", val);
+            }
+            WriteLine(" ");
+        }
+
+        public void IdentifyWhetherToCover()
+        {
+            for (int i = 0; i < weightedDistance.Length -1; i++) //complete the heading
+            {
+                
+                /*
+                 provide statements that 
+                 (1) assign 0 to each element of cover if its corresponding demand point has estimated demand less than 50
+                 (2) assign 1 to each element of cover if its corresponding demand point has estimated demand greater than or equal to 50
+                 */
+            }
+            Write("Coverage Decision: ");
+
+            foreach (int val in weightedDistance) //complete the heading
+            {
+                Write("{0:F0} ", val);
+            }
+            WriteLine(" ");
+        }
+
+        public void CalculateWDistance()
+        {
+            for (int i = 0; i < weightedDistance.Length; i++) //complete the heading
+            {
+                weightedDistance[i] = i + 1;// complete the assignment statement
+            }
+            Write("Weighted Distance: ");
+
+            foreach (int val in weightedDistance) //complete the heading
+            {
+                Write("{0:F0} ", val);
+            }
+            WriteLine(" ");
+        }
+
+        public void PickFarthestPoint()
+        {
+            // provide statements that finds the index of the farthest point 
+
+            for (int i =0; i < cover.Length-1; i++) //complete the heading
+            {
+                if (weightedDistance.Length < 50) //complete the heading
+                {
+                    indexOfFarthestPoint = 0;// complete the assignment statement
+                }
+            }
+            WriteLine("The demand point with the greatest value of weighted distance is demand point " + (indexOfFarthestPoint + 1));
+        }
+
+        public void SelectRobotType()
+        {
+            double coverageS = double.Parse(MainProgram.GetInput("Please enter the coverage of Model S: "));
+            double dailycostsS = double.Parse(MainProgram.GetInput("Please enter the daily operations costs of Model S: "));
+            double coverageA = double.Parse(MainProgram.GetInput("Please enter the coverage of Model A: "));
+            double dailycostsA = double.Parse(MainProgram.GetInput("Please enter the daily operations costs of Model A: "));
+
+            double nRobotsS = Math.Ceiling(weightedDistance[20] / 3)*90; // complete the assignment statement 
+            double nRobotsA = Math.Ceiling(weightedDistance[20] / 5)*150; // complete the assignment statement
+            double totalCostsS = dailycostsS * nRobotsS; // complete the assignment statement 
+            double totalCostsA = dailycostsA * nRobotsA;// complete the assignment statement 
+
+            if (totalCostsS < totalCostsA) // complete the heading 
+            {
+                selectedRobotType = 'S';
+                nRobots = nRobotsS;
+                totalCosts = totalCostsS * nRobotsS; // complete the assignment statement
+            }
+            else
+            {
+                selectedRobotType = 'A'; // complete the assignment statement
+                nRobots = nRobotsA; // complete the assignment statement
+                totalCosts = totalCostsA * nRobotsA; // complete the assignment statement
+            }
+        }
+
+        public char GetSelectedType()
+        {
+            return selectedRobotType;
+        }
+
+        public double GetNRobots() //complete the heading
+        {
+            return nRobots; // complete the return statement
+        }
+        public double GetTotalCosts() //complete the heading
+        {
+            return totalCosts; // complete the return statement
+        }
+    }
+}

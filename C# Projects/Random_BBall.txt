@@ -1,0 +1,47 @@
+using System;
+using static System.Console;
+class MainClass 
+{
+  public static void Main (string[] args) 
+  {
+    int scoreWar, scoreBuc, winWar = 0, winBuc = 0, count = 0;
+            string input;
+            Random ranGen = new Random();
+
+            WriteLine("\t ----- NCAA Basketball Game Simulator -----");
+            WriteLine("Please enter any key to start...  ");
+            ReadKey();
+
+            while (winWar != 4 && winBuc != 4)
+            {
+                count++;
+                scoreWar = ranGen.Next(80, 140);
+                scoreBuc = ranGen.Next(75, 135);
+
+                if (scoreWar >= scoreBuc)
+                {
+                    winWar++;
+                    WriteLine("Game{0:F0} result: Warriors({3:F0}) {1:F0} - {2:F0} Bucks({4:F0}) ", count, scoreWar, scoreBuc, winWar, winBuc);
+                }
+                else
+                {
+                    winBuc++;
+                    WriteLine("Game{0:F0} result: Warriors({3:F0}) {1:F0} - {2:F0} Bucks({4:F0}) ", count, scoreWar, scoreBuc, winWar, winBuc);
+                }
+                Write("Please enter any key to continue...  ");
+                ReadKey();
+            }
+
+            if (winWar == 4)
+            {
+                WriteLine("\t ----- Warriors won the championship! :) -----");
+            }
+            else
+            {
+                WriteLine("\t ----- Bucks won the championship! :) -----");
+            }
+
+
+            ReadKey();
+  }
+}

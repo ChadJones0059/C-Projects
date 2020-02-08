@@ -1,0 +1,46 @@
+using System;
+using static System.Console;
+namespace Problem_4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int VCU, UVA;
+            int vcuWIN = 0;
+            int uvaWIN = 0;
+            string input;
+
+            WriteLine("        ----- NCAA Basketball Game Simulator -----");
+            WriteLine("Please press enter key to start...");
+            input = ReadLine();
+
+            do
+            { 
+                Random ranGen = new Random();
+                VCU = ranGen.Next(80, 95);
+                UVA = ranGen.Next(65, 110);
+
+                if(VCU > UVA)
+                {
+                    vcuWIN++;
+                }
+                else
+                {
+                    uvaWIN++;
+                }
+                WriteLine("Game result: VCU" + "("+vcuWIN+") "  + VCU + " - " + UVA + " UVA " + "("+uvaWIN+")");
+            }
+            while (vcuWIN < 2 && uvaWIN < 2);
+
+            if (vcuWIN > uvaWIN)
+            {
+                WriteLine("VCU is the winner of the series!");
+            }
+            else
+                WriteLine("UVA is the winner of the series!");
+
+            ReadKey();
+        }
+    }
+}

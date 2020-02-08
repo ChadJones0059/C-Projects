@@ -1,0 +1,50 @@
+using System;
+using static System.Console;
+
+namespace Problem_5
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            double course1;
+            double course2;
+            double course3;
+            double total;
+            double avg;
+            int counter = 0;
+
+            WriteLine("               -------GPA Calculator by Chad Jones-------");
+
+            string input;
+            Write("Please enter your grade from your first course (Enter 4, 3, 2, 1, or 0 for A, B, C, D, F, respectfully): ");
+            input = ReadLine();
+            course1 = double.Parse(input);
+            counter += 1; //counter++; or ++counter; or Counter = counter + 1;
+
+            Write("Please enter your grade from your second course (Enter 4, 3, 2, 1, or 0 for A, B, C, D, F, respectfully): ");
+            input = ReadLine();
+            course2 = double.Parse(input);
+            counter += 1;
+
+            Write("Please enter your grade from your third course (Enter 4, 3, 2, 1, or 0 for A, B, C, D, F, respectfully): ");
+            input = ReadLine();
+            course3 = double.Parse(input);
+            counter += 1;
+
+            total = 3 * (course1 + course2 + course3);
+            avg = total / (counter * 3);
+
+            WriteLine("                  -------Calculation Results-------");
+
+            WriteLine("Course 1 : " + course1);
+            WriteLine("Course 2 : " + course2);
+            WriteLine("Course 3 : " + course3);
+
+            WriteLine("Total :  " + total);
+            WriteLine("Average gpa : " + avg);
+
+            ReadKey();
+        }
+    }
+}

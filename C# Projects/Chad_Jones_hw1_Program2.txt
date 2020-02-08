@@ -1,0 +1,45 @@
+using System;
+using static System.Console;
+
+namespace Problem_2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            WriteLine("     ----- Score Average Calculator by Chad Jones -----     ");
+
+            string name;
+            double midterm;
+            double final;
+            double total;
+            double avg;
+
+            string input;
+            Write("Please enter your name: ");
+            input = ReadLine();
+            name = input;
+
+            Write("Please enter your midterm exam score: ");
+            input = ReadLine();
+            midterm = double.Parse(input);
+
+            Write("Please enter your final score: ");
+            input = ReadLine();
+            final = double.Parse(input);
+
+            total = midterm + final;
+            avg = total / 2;
+
+            WriteLine("            ----- Calculation Resuluts -----          ");
+
+            WriteLine("Name: " + name);
+            WriteLine("Midterm: " + midterm);
+            WriteLine("Final: " + final);
+            WriteLine("Total: " + total);
+            WriteLine("Average: " + avg);
+
+            ReadKey();
+        }
+    }
+}

@@ -1,0 +1,75 @@
+using System;
+using static System.Console;
+namespace Speeding
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string input;
+            int year = 0;
+            double speed = 0;
+            double fine = 0;
+            int miss = 0;
+
+            do
+            {
+
+                Write("Please enter the students year (e.g. 1, 2, 3, or 4): ");
+                year = int.Parse(ReadLine());
+
+                Write("Please enter the students speed recorded: ");
+                speed = double.Parse(ReadLine());
+
+                fine = (speed - 15) / 5 * 87.50 + 75.00;
+
+                if (speed < 15 || year < 0)
+                {
+                    miss++;
+                    WriteLine("Please enter a valid input!");
+                }
+
+                else
+                {
+                    if (year == 4)
+                    {
+                        if (speed > 20)
+                        {
+                            fine += 200;
+                        }
+                        else
+                        {
+                            fine += 50;
+                        }
+                    }
+                    else
+                    {
+                        if (year == 1)
+                        {
+                            if (speed > 20)
+                            {
+                                fine += 100;
+                            }
+                            else
+                            {
+                                fine -= 50;
+                            }
+                        }
+                    }
+                    break;
+                }
+
+            } while (miss <= 3);
+            if (miss <= 3)
+            {
+                WriteLine("The fine amount is " + fine);
+            }
+            else
+            {
+                WriteLine("You have made more than 3 mistakes. Program terminated");
+
+            }
+            ReadKey();
+        }
+    }
+}

@@ -1,0 +1,79 @@
+using System;
+using static System.Console;
+
+namespace MyNamespace
+{
+    class MyClass
+    {
+        static void Main()
+        {
+            PmtCalc payment = new PmtCalc();
+
+            payment.SetCash(GetInput("monthly cash flow in $"));
+            payment.SetLoan(GetInput("loan amount in $"));
+            payment.SetPeriod(GetInput("loan period in months"));
+            payment.SetiRate(GetInput("monthly interest rate in % (e.g. enter 4.5 for 4.5%)"));
+
+            payment.GetPayment();
+            payment.DisplayPayment();
+
+            ReadKey();
+        }
+
+        static string GetInput(string param1)
+        {
+            string input;
+            Write("Please enter your " + param1 + ": ");
+            input = ReadLine();
+            return input;
+        }
+
+    }
+}
+
+
+
+using System;
+using static System.Console;
+
+
+namespace MyNamespace
+{
+    public class PmtCalc
+    {
+        double cash, loan, period, iRate, pay;
+        public PmtCalc()
+        {
+            cash = 0;
+            loan = 0;
+            period = 0;
+            iRate = 0;
+            pay = 0;
+        }
+        public void SetCash(string userInput)
+        {
+            cash = double.Parse(userInput);
+        }
+        public void SetLoan(string userInput)
+        {
+            loan = double.Parse(userInput);
+        }
+        public void SetPeriod(string userInput)
+        {
+            period = double.Parse(userInput);
+        }
+        public void SetiRate(string userInput)
+        {
+            iRate = double.Parse(userInput);
+        }
+        public void GetPayment()
+        {
+            pay = cash * iRate / 100 / (1 - 1 / Math.Pow(1 + iRate / 100, period));
+        }
+        public void DisplayPayment()
+        {
+            WriteLine("The calculated monthly payment is ${0:F3}", + pay);
+        }
+
+    }
+}

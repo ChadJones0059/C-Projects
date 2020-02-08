@@ -1,0 +1,80 @@
+using System;
+using static System.Console;
+namespace Problem_4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int vcuWIN = 0;
+            int uvaWIN = 0;
+            int vcuSCORE = 0;
+            int uvaSCORE = 0;
+            int result = 0;
+            int counter = 1;
+            WriteLine("        ----- NCAA Basketball Game Simulator -----");
+            WriteLine("Please press enter key to start...");
+            ReadKey();
+
+            do
+            {
+                vcuSCORE = GamePlay(0);
+                uvaSCORE = GamePlay(1);
+                result = GetResult(vcuSCORE, uvaSCORE);
+
+                if (result == 0)
+                {
+                    vcuWIN++;
+                }
+                else if (result == 1)
+                {
+                    uvaWIN++;
+                }
+
+                DisplayResult(counter, vcuWIN, vcuSCORE, uvaWIN, uvaSCORE);
+
+                counter++;
+                
+            } while (vcuWIN < 2 && uvaWIN < 2);           
+        }
+        static int GamePlay(int input)
+        {
+            Random ranGen = new Random();
+            int score = 0;
+
+            if (input == 0)
+            {
+                score = ranGen.Next(80, 95);
+            }
+            else if (input == 1)
+            {
+                score = ranGen.Next(65, 110);
+            }
+            return score;            
+        }
+        static int GetResult(int vcu, int uva)
+        {            
+            if(vcu >= uva)
+            {
+                return 0;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+        static void DisplayResult(int counter, int vcuWIN, int vcuSCORE, int uvaWIN, int uvaSCORE)
+        {
+            WriteLine("Game " + counter + " Result: VCU(" + vcuWIN + ") " + vcuSCORE + " - " + uvaSCORE + " UVA" + "(" + uvaWIN+")");
+            if (vcuWIN == 2)
+            {
+                WriteLine("VCU is the winner of the series! Let's Party!!");
+            }
+            else if (uvaWIN ==2)
+            {
+                WriteLine("UVA is the winner of the series. BOOO...Oh well...Let's Party!!");
+            }
+            ReadKey();
+        }
+    }
+}
