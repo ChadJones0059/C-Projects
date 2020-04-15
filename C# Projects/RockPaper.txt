@@ -57,7 +57,7 @@ namespace RockPaper
                     }
                 }
             }
-            WriteLine("Ya fucking broke son! $" + money);
+            WriteLine("You are broke! $" + money);
             ReadKey();
         }
     }
